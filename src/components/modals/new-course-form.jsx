@@ -1,53 +1,55 @@
-import React, {Component} from 'react';
-import { Formik, Field, Form } from 'formik';
-import axios from 'axios';
-import {Button} from 'reactstrap';
+import { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
 
+const supabase = createClient("https://ifenhtfedffkotsqiuuy.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZW5odGZlZGZma290c3FpdXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTYwMTEzMTgsImV4cCI6MjAxMTU4NzMxOH0.jdKA0tEJguoBAeoY_DdYunhnyWdZpFuaNrj-4ye6m4g");
 
-export default class NewCourseForm extends Component {
-    constructor(props){
-      super(props);
+export default function NewCourse() {
 
-    }
+  
+  const [name, setName] = useState('');
+  const [hours, setHours] = useState('');
+  const [description, setDescription] = useState('');
 
-    render() {
-      return(
-        <Formik
-        initialValues={{
-        id: '',
-        name: '',
-        hours: '',
-        info: '',
-        }}
-        onSubmit={async (values, {resetForm}) => {
-        await new Promise((r) => setTimeout(r, 500));
-        axios.post("http://localhost:3000/courses", values).then((response) => {
-        console.log(response.status, response.data);
-        resetForm({values:''});
+  const handleSubmit = (event) => {
+      new_course({name: name, hours: hours, description:description})
+      event.preventDefault();
+  };
 
-          })
-      }}
-    >  
-        <Form>
-                <label htmlFor="name">Course name</label>
-                <Field id="name" name="name" placeholder="new course name" />
+  const handleName = (event) => {
+      event.preventDefault();
+      setName(event.target.value)
+  };
 
-                <label htmlFor="hours">Hours</label>
-                <Field id="hours" name="hours" placeholder="hours" />
-
-                <label htmlFor="info">Description</label>
-                <Field
-                id="info"
-                name="info"
-                placeholder="details about the course"
-                type="text"
-                />
-                <Button type="submit">Submit</Button>
-                
-              
-            </Form>
-        </Formik>
-          
-      );
-    }
+  const handleHours = (event) => {
+      event.preventDefault();
+      setHours(event.target.value)
   }
+  const handleDescription = (event) => {
+      event.preventDefault();
+      setDescription(event.target.value)
+  }
+
+  const new_course = async () => {
+      const {data, error} = 
+      await supabase
+          .from('courses')
+          .insert([
+              {name: name, hours: hours, description: description}
+          ])
+  };
+
+  return (
+      <div>
+          <h1>
+              Add a new course
+          </h1>
+              <form onSubmit={handleSubmit}>
+                  
+                  <input onChange={handleName} type="text" value={name} placeholder="Name" autoComplete="false" /><br></br>
+                  <input onChange={handleHours} type="integer" value={hours} placeholder="hours" autoComplete="false" /><br></br>
+                  <input onChange={handleDescription} type="text" value={description} placeholder="description" autoComplete="false" /><br />
+                  <button>Add</button>
+              </form>
+      </div>
+  )
+}

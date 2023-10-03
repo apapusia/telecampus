@@ -1,0 +1,38 @@
+@import "./sidebar.scss";
+@import "./courses.scss";
+@import "./modal.scss";
+@import "./index";
+@import "./App";
+
+
+/* html {
+    font-size: 62.5%; // 1rem is 10px
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-family: 'montserrat';
+}
+
+body {
+    overflow-x: hidden;
+    font-weight: normal;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+}
+ 
+.app {
+    margin-top: 1rem;
+}
+*/
