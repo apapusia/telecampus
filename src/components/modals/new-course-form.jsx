@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { supabase } from '../../supabaseClient'
 
-const supabase = createClient("https://ifenhtfedffkotsqiuuy.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZW5odGZlZGZma290c3FpdXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTYwMTEzMTgsImV4cCI6MjAxMTU4NzMxOH0.jdKA0tEJguoBAeoY_DdYunhnyWdZpFuaNrj-4ye6m4g");
 
 export default function NewCourse() {
 
@@ -12,7 +12,9 @@ export default function NewCourse() {
 
   const handleSubmit = (event) => {
       new_course({name: name, hours: hours, description:description})
+      e.target.reset();
       event.preventDefault();
+
   };
 
   const handleName = (event) => {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, BrowserRouter} from 'react-router-dom'; 
+import {Link} from 'react-router-dom'; 
 
 
 export default class SidebarComponent extends Component {
@@ -14,9 +14,9 @@ export default class SidebarComponent extends Component {
         <li><Link to='/'>Dashboard</Link></li>
         <li><Link to='/courses'>Courses</Link></li>
         <li><Link to='/profile'>Profile</Link></li>
-        <li><Link to='/logged-out'>Exit</Link></li> 
-        <li><Link to='/logged-out2'>form</Link></li>
-        <li><Link to='/modal'>modal</Link></li> 
+       {/*  <li><Link to='/'>Home</Link></li>  */}
+        <li><Link to='/login'>Login</Link></li>
+     
       </ul>
     
     </div>        
