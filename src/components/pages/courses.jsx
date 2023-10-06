@@ -6,6 +6,7 @@ import NewCourseModal from "../modals/modal";
 function Courses() {
     
   const [courses, setCourses] = useState([]);
+  const [isEnrolled, setIsEnrolled] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -14,6 +15,10 @@ function Courses() {
   
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const studentIsEnrolled = () => {
+    isEnrolled(false);
   };
 
   useEffect(() => {
@@ -34,6 +39,24 @@ function Courses() {
         console.log('error', error);
       }};
 
+      const handleEnroll = async (courseId, studentID) => {
+        try {
+          await supabase.from('dasboard').insert([
+            { course_ID: courseId, student_ID: studentID },
+          ]);
+          
+        } catch (error) {
+          console.log('error', error);
+        }};
+
+      async function testhandleEnroll() {        
+        const { data: { user } } = await supabase.auth.getUser()
+        const {data: dasboard} = await supabase.from('dasboard').select('*').eq('student_id', user.id);
+            console.log(dasboard);
+        };
+        
+       
+
   return (
 
     <div className='listing-courses'>
@@ -45,6 +68,7 @@ function Courses() {
                     <th>Course</th>
                     <th>Hours</th>
                     <th>Description</th>
+                    <th>Enroll</th>
                     <th>Delete</th>
                 </tr>
                 </thead> 
@@ -58,8 +82,11 @@ function Courses() {
                   <td key={course.hours}>{course.hours}</td>
                   <td key={course.description}>{course.description}</td>
                   <td className="operation">
-                <button className="btn-remove" onClick={() => handleRemove(course.id)}>Delete</button>
-                </td>
+                    <button className="btn-remove" onClick={() => testhandleEnroll()}>Enroll</button>
+                  </td>
+                  <td className="operation">
+                    <button className="btn-remove" onClick={() => handleRemove(course.id)}>Delete</button>
+                  </td>
               </tr>
             </tbody>
         </table>
