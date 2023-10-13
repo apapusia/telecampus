@@ -9,6 +9,9 @@ import Profile from './components/pages/profile';
 import Login from './components/login_auth/auth';
 import AdminCourses from './components/admin/admin-courses';
 import EnrollCourses from './components/pages/enroll-courses';
+import Courses from './components/pages/courses';
+import Lessons from './components/pages/lessons';
+
 
 export default function App(){
 
@@ -29,12 +32,14 @@ export default function App(){
                     <Route path='/dashboard' element={<Dashboard />}/>
                     <Route path='/profile' element={<Profile />}/> 
                     <Route path='/admin-courses' element={<AdminCourses />}/> 
-                    <Route path='/courses' element={<EnrollCourses />}/> 
+                    <Route path='/enroll-courses' element={<EnrollCourses />}/>
                     <Route path='/login' element={<Login />}/>
+                    <Route path='/lessons' element={<Lessons />}/>
+                    
+                    
                   </Route>
-                    <Route path='/' element={<Home />}/>                                        
-                    {/* <Route path='/home' element={<Home />}/> */}
-                           
+                    <Route path='/' element={<Home />}/>
+                    <Route path='/courses' element={<Courses />}/>
                   </Routes>
                   </div>
               </BrowserRouter>

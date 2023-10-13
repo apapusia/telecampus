@@ -2,18 +2,19 @@
 .sidebar{
     display: flex;
     flex-direction: column;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
+ 
 } 
 
 .sidebar li{
     margin: 2rem;
-    text-decoration: none;
     list-style-type: none;
+    
 }
 
-.sidebar-items{
-    display: flex;
-    
+.sidebar *{
+    color: aliceblue;
+    font-family: "Quicksand", sans-serif;
+    text-decoration: none;
+    font-size: 1.5rem;
 }
 

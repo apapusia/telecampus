@@ -42,7 +42,7 @@ export default function Navbar (){
             <Link to='/profile'>Profile</Link> 
           </div>
           <div>
-            <button onClick={() => handleSignOut()}>Sign out</button>
+            <button className='home-button' onClick={() => handleSignOut()}>Sign out</button>
             </div>
           </div>
         </div>

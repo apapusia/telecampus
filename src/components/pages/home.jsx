@@ -9,12 +9,13 @@ export default function Home (){
    
 
 return (
-    <div>
-    <img src={studing} alt="studing" />
-    
-        <div className='home-container'>            
-            <button onClick={() => nav("/courses")}>Courses list</button>
-        </div>   
+    <div className='home-container'>
+        <h1>Discover Excellence</h1> 
+        <h3>Your journey starts here.</h3> 
+            <button className='home-button' onClick={() => nav("/courses")}>Courses list</button>
+            <img src={studing} alt="studing" />
+            
+           
     </div>
     );
 }

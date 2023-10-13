@@ -1,11 +1,23 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from '../../supabaseClient'
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions } from '@mui/material';
+import aula from '../../assets/aula.jpg'
+import Lessons from "./lessons";
 
 
 export default function Dashboard() {
   
   const [myCourses, setMyCourses] = useState([]);
+  const [lessons, setLessons] = useState([]);
+ 
+  useEffect(() => {
+    getLessons();
+  }, []);
 
  useEffect(() => {
     getStudentCourses();
@@ -35,38 +47,71 @@ export default function Dashboard() {
         console.log('error', error);
       }}; 
 
-  return (
+    async function getLessons(courseId) {
+      try{
+        const {data: lessons, error} = await supabase.from('lessons')
+        .select('*, courses(id)')
+        .eq('course_id', courseId);
+          setLessons(lessons);
+          console.log(lessons);
+        } catch (error) {
+          console.log('error', error);
+        }
+    }  
 
-    <div className='listing-courses'>
-      <h2>My courses</h2>
-        <table className='courses-table'>
-               <thead>
-                <tr>
-                    <th>Course</th>
-                    <th>Hours</th>
-                    <th>Description</th>
-                    <th>Drop</th>
-                    
-                </tr>
-                </thead> 
-      </table>
+
+  return (
+    <div className="card-container">
+
+    {myCourses.map((course) => (
+
+    <Card sx={{ Width: 340 , minWidth: 320, m: 3 }} key={course.id}>
+      <CardActionArea onClick={() => getLessons(course.id) } >
+      
+        <CardMedia
+          component="img"
+          height="140"
+          image={aula}
+          alt="aula"
+        />
+        <CardContent >
+          <Typography gutterBottom variant="h5" component="div" key={course.name}>
+          {course.name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" key={course.description}>
+          {course.description}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" key={course.hours}>
+          {course.hours}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="error" onClick={() => dropCourse(course.id)}>
+          Drop
+        </Button>
+      </CardActions>
+    </Card>
+   )) }
+   </div>
+);
+}
+
+
+
+    {/* 
      
       {myCourses.map((course) => (
         <table className='courses-table' key={course.id}>
-            <tbody>
-              <tr>
+            
                   <td key={course.name}>{course.name}</td>
                   <td key={course.hours}>{course.hours}</td>
                   <td key={course.description}>{course.description}</td>
                   <td className="operation">
-                    <button className="btn-remove" onClick={() => dropCourse(course.id)}>Drop</button>
+                    <button className="btn-drop" onClick={() => dropCourse(course.id)}>Drop</button>
                   </td>
    
-              </tr>
-            </tbody>
-        </table>
+       
           ))} 
     </div>
-
-  );
-}
+    </div> */}

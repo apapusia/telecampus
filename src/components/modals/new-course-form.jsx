@@ -42,16 +42,13 @@ export default function NewCourse() {
 
   return (
       <div>
-          <h1>
-              Add a new course
-          </h1>
-              <form onSubmit={handleSubmit}>
-                  
+        <h3>Add a new course</h3>
+        <form onSubmit={handleSubmit}>                  
                   <input onChange={handleName} type="text" value={name} placeholder="Name" autoComplete="false" /><br></br>
                   <input onChange={handleHours} type="integer" value={hours} placeholder="hours" autoComplete="false" /><br></br>
                   <input onChange={handleDescription} type="text" value={description} placeholder="description" autoComplete="false" /><br />
-                  <button>Add</button>
-              </form>
+                  <button className="btn-add">Add</button>
+        </form>
       </div>
   )
 }

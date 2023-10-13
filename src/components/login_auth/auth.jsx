@@ -46,7 +46,9 @@ export default function Login() {
     );
   } else {
     return (
-    <h1>hola, ya estás logeado</h1>
+      <div className='container'>
+        <h1>hola, ya estás logeado</h1>
+    </div>
     );
   }
 }

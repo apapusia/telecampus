@@ -19,7 +19,7 @@ body {
 }
 
 * {
-  color: var(--custom-color);
+  /* color: var(--custom-color); */
   font-family: var(--custom-font-family);
   box-sizing: border-box;
 }
@@ -38,6 +38,7 @@ body,
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+  color: aliceblue;
 }
 .row {
   position: relative;

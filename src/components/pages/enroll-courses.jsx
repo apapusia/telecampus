@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from '../../supabaseClient'
-import NewCourseModal from "../modals/modal";
+
 
 function EnrollCourses() {
     
   const [courses, setCourses] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-  
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
+ 
   useEffect(() => {
     getCourses();
   }, []);
@@ -41,8 +32,8 @@ function EnrollCourses() {
       
         
           return(
+            <div className="container">
             <div className='listing-courses'>
-            <NewCourseModal    isModalOpen={isModalOpen} onClose={closeModal} />
             <table className='courses-table'>
                      <thead>
                       <tr>
@@ -63,13 +54,14 @@ function EnrollCourses() {
                         <td key={course.hours}>{course.hours}</td>
                         <td key={course.description}>{course.description}</td>
                         <td className="operation">
-                          <button className="btn-remove" onClick={() => handleEnroll(course.id)}>Enroll</button>
+                          <button className="btn-enroll" onClick={() => handleEnroll(course.id)}>Enroll</button>
                         </td>
                     </tr>
                   </tbody>
               </table>
                 ))} 
           </div>
+        </div>
       
             
           );

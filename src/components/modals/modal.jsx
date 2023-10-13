@@ -12,10 +12,13 @@ const customStyles = {
     right:'auto',
     marginRight:'-50%',
     transform:'translate(-50%, -50%',
-    width:'800px'
-},
-overlay:{
+    width:'800px',
+    height:'350px',
+    color:'rgba(11, 15, 11, 1)'
+   },
+  overlay:{
     backgroundColor:'rgba(1, 1, 1, 0.75)',
+    
 }
 };
 
@@ -30,13 +33,14 @@ const NewCourseModal = ({ isModalOpen, onClose }) => {
       <section id='root'>
         <div>
           <ReactModal onRequestClose={() => {
-        onClose();
-        
-      }}
-      isOpen={isModalOpen}
-      style={customStyles}>
-          <NewCourse />
-          <button onClick={() => onClose()}>Cancel</button>
+          onClose();        
+        }}
+          isOpen={isModalOpen}
+          style={customStyles}>
+            
+            <NewCourse />
+            
+            <button onClick={() => onClose()}>Cancel</button>
           </ReactModal>
         </div>
       </section>
