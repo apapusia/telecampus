@@ -4,32 +4,28 @@ import Dashboard from "./dashboard";
 
 
 function Lessons() {
-    
-  /* const [lessons, setLessons] = useState([]);
+  const getId = localStorage.getItem('courseId')
+
+  const [lessons, setLessons] = useState([]);
    
   useEffect(() => {
+
     getLessons();
   }, []);
 
-  async function getLessons(courseId) {
+  async function getLessons() {
     try{
-      const {data: lessons, error} = await supabase.from('lessons')
+      const {data: lessons} = await supabase.from('lessons')
       .select('*, courses(id)')
-      .eq('course_id', courseId);
+      .eq('course_id', getId);
         setLessons(lessons);
         console.log(lessons);
       } catch (error) {
         console.log('error', error);
       }
   }  
-   */
- /*  async function getLessons() {
-    const {data} = await supabase.from('lessons').select('*');
-      setLessons(data);
-  }     */
-        
-
           return(
+            
             <div className="container">
             <div className='listing-lessons'>
                      
