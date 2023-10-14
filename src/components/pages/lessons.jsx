@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from '../../supabaseClient'
-import Dashboard from "./dashboard";
+
 
 
 function Lessons() {
+  
   const getId = localStorage.getItem('courseId')
-
   const [lessons, setLessons] = useState([]);
    
   useEffect(() => {
@@ -19,7 +19,6 @@ function Lessons() {
       .select('*, courses(id)')
       .eq('course_id', getId);
         setLessons(lessons);
-        console.log(lessons);
       } catch (error) {
         console.log('error', error);
       }

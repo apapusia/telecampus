@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { supabase } from '../../supabaseClient'
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import App from '../../app';
+import Dashboard from '../pages/dashboard';
 
 
 
@@ -15,13 +15,14 @@ export default function Login() {
       setSession(session);
     });
 
-    const {
+        const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
     return () => subscription.unsubscribe();
   }, []);
+
   
   if (!session) {
     return (
@@ -46,9 +47,7 @@ export default function Login() {
     );
   } else {
     return (
-      <div className='container'>
-        <h1>hola, ya estás logeado</h1>
-    </div>
+      <Dashboard />
     );
   }
 }

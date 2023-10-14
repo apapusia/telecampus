@@ -7,18 +7,17 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import aula from '../../assets/aula.jpg'
-import Lessons from "./lessons";
-import {Link} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
 export default function CourseCards() {
   
   const [myCourses, setMyCourses] = useState([]);
-  const [lessons, setLessons] = useState([]);
+  const nav = useNavigate();
 
   const setId = (courseId) => {
     localStorage.setItem('courseId', courseId)
-    console.log('este es el setid', courseId);
+    nav("/lessons");
 };
 
  useEffect(() => {
@@ -49,28 +48,13 @@ export default function CourseCards() {
         console.log('error', error);
       }}; 
 
- /*    async function getLessons(courseId) {
-
-      try{
-        const {data: lessons} = await supabase.from('lessons')
-        .select('*, courses(id)')
-        .eq('course_id', courseId);
-          setLessons(lessons);
-          console.log(lessons);
-        } catch (error) {
-          console.log('error', error);
-        }
-    }   */
-
-
   return (
     <div className="card-container">
 
     {myCourses.map((course) => (
 
     <Card sx={{ Width: 340 , minWidth: 320, m: 3 }} key={course.id}>
-      <CardActionArea >
-          
+      <CardActionArea onClick={() => setId(course.id)}>
         <CardMedia
           component="img"
           height="140"
@@ -92,8 +76,7 @@ export default function CourseCards() {
       <CardActions>
         <Button size="small" color="error" onClick={() => dropCourse(course.id)}>
           Drop
-        </Button>
-        <Link to='/lessons' ><p className="btn btn-primary" onClick={() => setId(course.id)}>MORE DETAILS</p></Link>
+        </Button>        
       </CardActions>
     </Card>
    )) }
