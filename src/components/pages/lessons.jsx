@@ -1,22 +1,46 @@
 import { useEffect, useState } from "react";
 import { supabase } from '../../supabaseClient'
-
+import { DataGrid} from '@mui/x-data-grid';
 
 
 function Lessons() {
-  
+
   const getId = localStorage.getItem('courseId')
   const [lessons, setLessons] = useState([]);
-   
-  useEffect(() => {
+  const [thisCourse, setThisCourseName] = useState([]); 
+  const [thisTeacher, setGetTeacher] = useState([]);
 
+
+
+  const columns = [    
+    { field: 'title', headerName: 'Lesson', width: 500 },
+    { field: 'state', headerName: 'State', width: 50 },
+    { field: 'score', headerName: 'Score', width: 50 },
+  ];
+  
+
+  useEffect(() => {
+    getTeacher();
+    getCourse();
     getLessons();
   }, []);
+
+  async function getCourse() {
+    const {data:thisCourse} = await supabase.from('courses').select('id, name, hours').eq('id',getId);
+    setThisCourseName(thisCourse[0].name);
+  }
+
+  async function getTeacher() {
+    const {data:thisTeacher} = await supabase.from('teachers').select('name, courses!inner(*)').eq('courses.id',getId);
+    setGetTeacher(thisTeacher[0].name);
+   
+  }
+
 
   async function getLessons() {
     try{
       const {data: lessons} = await supabase.from('lessons')
-      .select('*, courses(id)')
+      .select('id, title, state, score, courses(id)')
       .eq('course_id', getId);
         setLessons(lessons);
       } catch (error) {
@@ -24,26 +48,19 @@ function Lessons() {
       }
   }  
           return(
-            
-            <div className="container">
-            <div className='listing-lessons'>
-                     
-            {lessons.map((lesson) => (
-              <div className='lessons-table' key={lesson.id}>
-                        <div key={lesson.title}>{lesson.title}</div> 
-                        <div key={lesson.state}>{lesson.state}</div>
-                        <div key={lesson.score}>{lesson.score}</div>
-                        <div className="operation">
-                          <button className="btn-enroll">Take lesson</button>
-                        </div>
-                </div>
-                ))} 
-          </div>
-        </div>
-      
-            
+            <div className='lessons-table'>
+              <div className='this-course-info'>
+                <h2>Course: {thisCourse}</h2>
+                <h3>Teacher: {thisTeacher}</h3>
+              </div>
+              <div  style={{ height: 500, width: '100%' }}>
+                <DataGrid 
+                  columns={columns}
+                  rows={lessons}
+                />
+              </div> 
+            </div> 
           );
-          
         };
 
 export default Lessons;
