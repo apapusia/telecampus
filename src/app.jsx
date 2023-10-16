@@ -11,6 +11,7 @@ import AdminCourses from './components/admin/admin-courses';
 import EnrollCourses from './components/pages/enroll-courses';
 import Courses from './components/pages/courses';
 import Lessons from './components/pages/lessons';
+import ThisLesson from './components/pages/this-lesson';
 
 
 export default function App(){
@@ -35,6 +36,7 @@ export default function App(){
                     <Route path='/enroll-courses' element={<EnrollCourses />}/>
                     <Route path='/login' element={<Login />}/>
                     <Route path='/lessons' element={<Lessons />}/>
+                    <Route path='/this-lesson' element={<ThisLesson />}/>
                     
                     
                   </Route>

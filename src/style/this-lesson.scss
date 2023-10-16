@@ -1,0 +1,24 @@
+.lesson-container{
+    display: flex;
+    width: 80%;
+    height: 80%;
+    background-color: aliceblue;
+    color: black;
+    border-radius: 5px;
+    padding: 20px;
+
+}
+
+.material-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+
+.text-container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}

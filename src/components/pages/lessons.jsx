@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from '../../supabaseClient'
 import { DataGrid} from '@mui/x-data-grid';
+import { useNavigate } from "react-router-dom";
+
 
 
 function Lessons() {
@@ -9,6 +11,12 @@ function Lessons() {
   const [lessons, setLessons] = useState([]);
   const [thisCourse, setThisCourseName] = useState([]); 
   const [thisTeacher, setGetTeacher] = useState([]);
+  const nav = useNavigate();
+
+  const setLessonId = (lessonId) => {
+    localStorage.setItem('lessonId', lessonId)
+    nav("/this-lesson");
+};
 
 
 
@@ -47,6 +55,8 @@ function Lessons() {
         console.log('error', error);
       }
   }  
+ 
+
           return(
             <div className='lessons-table'>
               <div className='this-course-info'>
@@ -54,9 +64,11 @@ function Lessons() {
                 <h3>Teacher: {thisTeacher}</h3>
               </div>
               <div  style={{ height: 500, width: '100%' }}>
-                <DataGrid 
+                <DataGrid
+                  /* onRowClick={getThisLesson} */
                   columns={columns}
                   rows={lessons}
+                  onRowClick={itm => setLessonId(itm.id)}
                 />
               </div> 
             </div> 
