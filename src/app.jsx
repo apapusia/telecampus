@@ -8,7 +8,7 @@ import './style/main.scss'
 import Profile from './components/pages/profile';
 import Login from './components/login_auth/auth';
 import AdminCourses from './components/admin/admin-courses';
-import EnrollCourses from './components/pages/enroll-courses';
+import CoursesList from './components/pages/courses_list';
 import Courses from './components/pages/courses';
 import Lessons from './components/pages/lessons';
 import ThisLesson from './components/pages/this-lesson';
@@ -37,7 +37,7 @@ export default function App(){
                     <Route path='/dashboard' element={<Dashboard />}/>
                     <Route path='/profile' element={<Profile />}/> 
                     <Route path='/admin-courses' element={<AdminCourses />}/> 
-                    <Route path='/enroll-courses' element={<EnrollCourses />}/>
+                    <Route path='/courses-list' element={<CoursesList />}/>
                     <Route path='/login' element={<Login />}/>
                     <Route path='/lessons' element={<Lessons />}/>
                     <Route path='/this-lesson' element={<ThisLesson />}/>

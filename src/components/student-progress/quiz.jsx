@@ -1,6 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import Quiz from 'react-quiz-component';
 
-function Quiz() {
+
+
+export default function LessonQuiz() {
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* function Quiz() {
   const [question, setQuestion] = useState('');
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -40,3 +59,4 @@ function Quiz() {
 }
 
 export default Quiz;
+ */

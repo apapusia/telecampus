@@ -71,31 +71,34 @@ function MyTasks() {
             <button className='btn-enroll' onClick={handleAddTask}>Add</button>
 			    </div>
         </div>
-        <div>
+        <div className='task-items-area'>
         {/* Muestra los datos del objeto */}
         
         {profileData && (
-  <div className='task-items-area'>
+  <div >
     <p className='text-body'>Incomplete Tasks:</p>
-    <ul className=''>
+    <ol>
         {profileData.incomplete.map((task) => (
-              <li key={task.id}>
+              <li   key={task.id}>
+                <div className="item-line">
                 <p>{task.text}</p>
-                <DoneIcon onClick={() => handleCompleteTask(task.id)}/>
+                <DoneIcon style={{ color: 'green' }} onClick={() => handleCompleteTask(task.id)}/>
+              </div>
               </li>
         ))}
-    </ul>
+    </ol>
 
     <p className='text-body'>Complete Tasks:</p>
-    <ul>
+    <ol>
          {profileData.complete.map((task) => (
               <li key={task.id}>
+                <div className="item-line">
                 <p>{task.text}</p>
-                <DeleteIcon onClick={() => handleDeleteCompletedTasks(task.id)}/>
-                {/* <button >Eliminar tarea completa</button> */}
+                <DeleteIcon style={{ color: 'red' }} onClick={() => handleDeleteCompletedTasks(task.id)}/>
+                </div>
               </li>
             ))}
-    </ul>
+    </ol>
   </div>
 )}
       </div>

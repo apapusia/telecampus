@@ -3,7 +3,7 @@ import { supabase } from '../../supabaseClient'
 import {BrowserRouter, Link} from 'react-router-dom'; 
 import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import logo from '../../assets/logo.png'
+import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 
 export default function Navbar (){  
   const [session, setSession] = useState(null);
@@ -27,7 +27,7 @@ export default function Navbar (){
     if (!session) {
       return (
           <div className='navbar-container'>
-              <img id='logo' src={logo} alt="logo" />
+              <CastForEducationIcon id='logo' />
             <div className='navbar'>
             <Link to='/login'>Login</Link> 
             </div>
@@ -36,7 +36,7 @@ export default function Navbar (){
     } else {
       return (
         <div className='navbar-container'>
-            <img id='logo' src={logo} alt="logo" />
+           <Link to="/dashboard"><CastForEducationIcon id='logo'/></Link>
           <div className='navbar'>
             <div>
             <Link to='/profile'>Profile</Link> 

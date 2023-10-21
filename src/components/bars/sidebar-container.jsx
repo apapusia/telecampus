@@ -20,7 +20,7 @@ export default function SidebarComponent(){
       return(
       <div className='sidebar'>
         <ul>
-          <li><Link to='/enroll-courses'>Courses list</Link></li>
+          <li><Link to='/courses-list'>Courses list</Link></li>
           <li><Link to='/dashboard'>Dashboard</Link></li>
           <li><Link to='/quiz'>quiz</Link></li>
           <li><Link to='/my-tasks'>My tasks</Link></li>
