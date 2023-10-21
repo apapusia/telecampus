@@ -2,13 +2,17 @@
 .sidebar{
     display: flex;
     flex-direction: column;
+    width: 10%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
  
 } 
 
 .sidebar li{
     margin: 2rem;
     list-style-type: none;
-    
+    margin-left: 15px;
 }
 
 .sidebar *{

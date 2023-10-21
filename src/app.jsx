@@ -12,6 +12,10 @@ import EnrollCourses from './components/pages/enroll-courses';
 import Courses from './components/pages/courses';
 import Lessons from './components/pages/lessons';
 import ThisLesson from './components/pages/this-lesson';
+import ThisMaterials from './components/student-progress/check-materials';
+import Quiz from './components/student-progress/quiz';
+import MyTasks from './components/pages/my-task';
+
 
 
 export default function App(){
@@ -37,11 +41,15 @@ export default function App(){
                     <Route path='/login' element={<Login />}/>
                     <Route path='/lessons' element={<Lessons />}/>
                     <Route path='/this-lesson' element={<ThisLesson />}/>
+                    <Route path='/my-tasks' element={<MyTasks />}/>
                     
                     
                   </Route>
                     <Route path='/' element={<Home />}/>
                     <Route path='/courses' element={<Courses />}/>
+                    <Route path='/this-lesson' element={<ThisMaterials />}/>
+                    <Route path='/quiz' element={<Quiz />}/>
+                    
                   </Routes>
                   </div>
               </BrowserRouter>
