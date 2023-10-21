@@ -57,30 +57,27 @@ function MyTasks() {
   };
 
   return (
-    <div className="home-container">
+    <div className="tasks-container">
         <div className="tasks-header">
-            <p>
-				<u>My Todo-s</u>
-			</p>
-            <div>
-				<div>Add a new todo item:
-                <input
+				  <p className="text-header"><DoneIcon/>My Todo-s</p>
+          <div className="input-area">
+            <input
                     type="text"
+                    id='task-input'
                     value={newTask}
                     onChange={(e) => setNewTask(e.target.value)}
-                    placeholder="Nueva tarea"
-                    />
-                <button onClick={handleAddTask}>Agregar tarea</button>
+                    placeholder="Insert a new task"
+            />
+            <button className='btn-enroll' onClick={handleAddTask}>Add</button>
 			    </div>
-			</div>
         </div>
         <div>
         {/* Muestra los datos del objeto */}
         
         {profileData && (
-  <div>
-    <h2>Incomplete Tasks:</h2>
-    <ul>
+  <div className='task-items-area'>
+    <p className='text-body'>Incomplete Tasks:</p>
+    <ul className=''>
         {profileData.incomplete.map((task) => (
               <li key={task.id}>
                 <p>{task.text}</p>
@@ -89,7 +86,7 @@ function MyTasks() {
         ))}
     </ul>
 
-    <h2>Complete Tasks:</h2>
+    <p className='text-body'>Complete Tasks:</p>
     <ul>
          {profileData.complete.map((task) => (
               <li key={task.id}>
