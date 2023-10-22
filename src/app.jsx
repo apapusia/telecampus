@@ -17,7 +17,6 @@ import Quiz from './components/student-progress/quiz';
 import MyTasks from './components/pages/my-task';
 
 
-
 export default function App(){
 
   const SidebarLayout = () => (

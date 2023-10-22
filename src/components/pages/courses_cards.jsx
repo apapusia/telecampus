@@ -44,7 +44,7 @@ export default function CourseCards() {
       }};  
        
   async function dropCourse(courseId) {        
-    const confirmation = window.confirm("¿Estás seguro de que deseas eliminar este curso?"); // Muestra una alerta y espera la respuesta del usuario
+    const confirmation = window.confirm("Are you sure you want to delete this course?");
 
     if (confirmation) {
       try {
@@ -61,8 +61,11 @@ export default function CourseCards() {
     }}; 
 
   return (
+    <div>
+      <div className="text-div">
+      You are enrolled in:
+      </div>
     <div className="card-container">
-
     {myCourses.map((course, index) => (
 
     <Card sx={{ Width: 340 , minWidth: 320, m: 3 }} key={course.id}>
@@ -92,6 +95,8 @@ export default function CourseCards() {
       </CardActions>
     </Card>
    )) }
-   </div>
+    </div>
+    </div>
+    
 );
 }

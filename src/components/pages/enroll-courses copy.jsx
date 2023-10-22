@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import Dashboard from "./dashboard";
 
 
 
@@ -25,32 +24,36 @@ function EnrollCourses() {
     'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D/fotos/mujer-colocando-notas-adhesivas-en-la-pared-Oalh2MojUuk',
   ];
 
-   
+ 
   useEffect(() => {
-    getUnenrolledCourses();
+    getCourses();
   }, []);
   
-  async function getUnenrolledCourses() {
-    try {
-      //todos los cursos
-      const { data: allCourses } = await supabase.from('courses').select('*');
-      //cursos en los que el usuario está inscrito
-      const { data: { user } } = await supabase.auth.getUser();
-      const { data: enroledCourses } = await supabase.from('courses')
-        .select('*,dasboard!inner(student_id)')
-        .eq('dasboard.student_id', user.id);
-      //diferencia
-      const unenrolledCourses = allCourses.filter(course => {
-        // check en la lista de cursos
-        return !enroledCourses.some(enroledCourse => enroledCourse.id === course.id);
-      });
-  
-      setCourses(unenrolledCourses);
 
-    } catch (error) {
-      console.log('error', error);
-    }
+  async function getCourses() {
+    const {data} = await supabase.from('courses').select('*');
+      setCourses(data);
   }
+
+  const checkEnrollment = async () => {
+    const { data: { user } } = await supabase.auth.getUser() 
+    if (user) {
+      const { data, error } = await supabase
+        .from('dashboard')
+        .select('course_id')
+        .eq('student_id', user.id)
+        .single();
+
+      if (data) {
+        // El usuario está inscrito en el curso
+        setIsEnrolled(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkEnrollment();
+  }, []);
 
   const handleEnroll = async (courseId) => {
         const confirmation = window.confirm("Are you sure you want to enroll this course?");
@@ -63,10 +66,6 @@ function EnrollCourses() {
             { course_id: courseId, student_id: user.id, course_state: 'false'})
             if (error) {
               console.log(error.message);
-            } else {
-              // actualizar la lista de cursos
-              const updatedCourses = courses.filter(course => course.id !== courseId);
-              setCourses(updatedCourses);
             }
            } catch (error) {
             console.log('error', error);
@@ -99,10 +98,20 @@ function EnrollCourses() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-
+    {/*     {isEnrolled(myCourses, course.id) ? (
+              <Button size="small" color="success">
+                Enrolled
+              </Button>
+            ) : (
               <Button size="small" color="info" onClick={() => handleEnroll(course.id)}>
                 Enroll
               </Button>
+            )}  */} 
+          {isEnrolled ? (
+            <button disabled>Enrolled</button>
+              ) : (
+            <button>Enroll</button>
+      )}
         </CardActions>
       </Card>
       )) }
