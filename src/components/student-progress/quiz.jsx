@@ -1,62 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import Quiz from 'react-quiz-component';
+import { useEffect, useState } from "react";
+import { supabase } from '../../supabaseClient';
 
 
+export default function saveQuizResults() {
+  
+    /* const [id, setId] = useState(''); */
+    const [student_id, setStudentId] = useState('');
+    const [lesson_id, setLessonId] = useState('');
+    const [score, setScore] = useState('');
 
-export default function LessonQuiz() {
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-/* function Quiz() {
-  const [question, setQuestion] = useState('');
-  const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [score, setScore] = useState(0);
-
-  // Aquí debes agregar la lógica para cargar preguntas y opciones.
-
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-    // Aquí debes agregar la lógica para verificar la respuesta y actualizar el puntaje.
-  };
-
-  const nextQuestion = () => {
-    // Aquí debes cargar la siguiente pregunta y opciones.
-    setSelectedOption(null);
-  };
-
-  return (
-    <div>
-      <h1>Quiz App</h1>
-      <h2>Question: {question}</h2>
-      <ul>
-        {options.map((option) => (
-          <li
-            key={option}
-            onClick={() => handleOptionSelect(option)}
-            className={selectedOption === option ? 'selected' : ''}
-          >
-            {option}
-          </li>
-        ))}
-      </ul>
-      <button onClick={nextQuestion}>Next Question</button>
-      <p>Score: {score}</p>
-    </div>
-  );
-}
-
-export default Quiz;
- */
+    const handleSubmit = (event) => {
+        new_course({student_id: student_id, lesson_id: lesson_id, score:score})
+        e.target.reset();
+        event.preventDefault();  
+    };
+  
+    const handleStudentId = (event) => {
+        event.preventDefault();
+        setStudentId(event.target.value)
+    };
+  
+    const handleLessonId = (event) => {
+        event.preventDefault();
+        setLessonId(event.target.value)
+    }
+    const handleScore = (event) => {
+        event.preventDefault();
+        setScore(event.target.value)
+    }
+  
+    const new_course = async () => {
+        const {data, error} = 
+        await supabase
+            .from('quizzes')
+            .insert([
+                {student_id: student_id, lesson_id: lesson_id, score: score}
+            ]);
+            console.log(data);
+    };
+  
+    return (
+        <div>
+          <h3>Add a new course</h3>
+          <form onSubmit={handleSubmit}>                  
+                    <input onChange={handleStudentId} type="text" value={student_id} placeholder="studentId" autoComplete="false" /><br></br>
+                    <input onChange={handleLessonId} type="integer" value={lesson_id} placeholder="lessonId" autoComplete="false" /><br></br>
+                    <input onChange={handleScore} type="text" value={score} placeholder="score" autoComplete="false" /><br />
+                    <button className="btn-add">Add</button>
+          </form>
+        </div>
+    )
+  }
